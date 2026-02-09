@@ -5,10 +5,7 @@
     <title>India Crime Policy Intelligence Dashboard</title>
 
     <!-- Leaflet -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <!-- Chart.js -->
@@ -61,119 +58,93 @@
         </div>
     </div>
 
-    <!-- KPI CARDS -->
     <div class="kpi-container">
-        <div class="kpi-card">
-            <h3>IPC Crime Rate</h3>
-            <p class="kpi-value" id="kpi-ipc">—</p>
-        </div>
-
-        <div class="kpi-card">
-            <h3>Murder Rate</h3>
-            <p class="kpi-value" id="kpi-murder">—</p>
-        </div>
-
-        <div class="kpi-card">
-            <h3>Chargesheeting Rate</h3>
-            <p class="kpi-value" id="kpi-charge">—</p>
-        </div>
-
-        <div class="kpi-card">
-            <h3>Kidnapping Recovery %</h3>
-            <p class="kpi-value" id="kpi-kidnap">—</p>
-        </div>
-
-        <div class="kpi-card">
-            <h3>Crime Cluster</h3>
-            <p class="kpi-value" id="kpi-cluster">—</p>
-        </div>
+        <div class="kpi-card"><h3>IPC Crime Rate</h3><p id="kpi-ipc">—</p></div>
+        <div class="kpi-card"><h3>Murder Rate</h3><p id="kpi-murder">—</p></div>
+        <div class="kpi-card"><h3>Chargesheeting Rate</h3><p id="kpi-charge">—</p></div>
+        <div class="kpi-card"><h3>Kidnapping Recovery %</h3><p id="kpi-kidnap">—</p></div>
+        <div class="kpi-card"><h3>Crime Cluster</h3><p id="kpi-cluster">—</p></div>
     </div>
 
     <h3>India Crime Map</h3>
     <div id="map"></div>
 </div>
 
-<!-- ================= COMPARISON ================= -->
-<!-- ================= STATE COMPARISON TAB ================= -->
+<!-- ================= STATE COMPARISON ================= -->
 <div id="comparison" class="tab-content">
 
-    <!-- HEADER -->
     <div class="comparison-header">
         <h2> State Performance vs Benchmarks</h2>
-        <p id="comparisonSubtitle">
-            Comparing <strong>Selected State</strong> with National Average and Similar States (2022)
-        </p>
-    </div>
-
-<!-- ================= STATE COMPARISON TAB ================= -->
-<div id="comparison" class="tab-content">
-
-    <!-- HEADER -->
-    <div class="comparison-header">
-        <h2> State Performance vs Benchmarks</h2>
-        <p id="comparisonSubtitle">
-            Comparing <strong>Selected State</strong> with National Average and Similar States (2022)
-        </p>
     </div>
 
     <!-- CONTROLS -->
-    <div class="comparison-controls">
-        <label><strong>Compare Selected State Against:</strong></label>
-        <select id="benchmarkMode">
-            <option value="national" selected>National Average</option>
-            <option value="cluster">Cluster Average</option>
-            <option value="peers">Peer States (Similar IPC)</option>
-        </select>
+    <div class="comparison-controls-grid">
+
+        <div class="control-group">
+            <label><strong>Select Primary State:</strong></label>
+            <select id="comparisonStateSelect"></select>
+        </div>
+
+        <div class="control-group">
+            <label><strong>Compare Against:</strong></label>
+            <select id="benchmarkMode">
+                <option value="national">National Average</option>
+                <option value="cluster">Cluster Average</option>
+                <option value="peers">Peer States (Similar IPC)</option>
+            </select>
+        </div>
+
+        <div class="control-group full-width right-align">
+            <label><strong>Compare Multiple States:</strong></label>
+            <select id="multiStateSelect" multiple size="8"></select>
+            <small>Hold Ctrl / Cmd to select multiple states</small>
+        </div>
+
     </div>
 
-    <!-- MAIN GRID -->
+    <!-- ================= MAIN GRID ================= -->
     <div class="comparison-grid">
 
         <!-- LEFT PANEL -->
-        <div class="comparison-panel left-panel">
-            <h3> State vs Benchmark</h3>
+        <div class="comparison-panel">
+            <h3>State vs Benchmark</h3>
             <p class="panel-subtitle">
                 Comparing key crime indicators against selected benchmark
             </p>
 
-            <!-- BAR CHART -->
             <canvas id="benchmarkBarChart" height="220"></canvas>
 
-            <!-- MINI KPI DIFFERENCE STRIP -->
             <div class="delta-strip">
                 <span>IPC: <strong id="delta-ipc">—</strong></span>
                 <span>Murder: <strong id="delta-murder">—</strong></span>
                 <span>Chargesheeting: <strong id="delta-charge">—</strong></span>
-                <span>Kidnapping Recovery: <strong id="delta-kidnap">—</strong></span>
             </div>
         </div>
 
         <!-- RIGHT PANEL -->
-        <div class="comparison-panel right-panel">
-            <h3> State vs Other States</h3>
+        <div class="comparison-panel">
+            <h3>Multi-State Comparison</h3>
             <p class="panel-subtitle">
-                Performance relative to similar or peer states
+                Comparative crime indicators across selected states
             </p>
 
-            <!-- PEER COMPARISON CHART -->
-            <canvas id="peerComparisonChart" height="220"></canvas>
+            <canvas id="multiStateBarChart" height="260"></canvas>
 
-            <!-- RADAR CHART -->
-            <h4 style="margin-top:25px;"> Crime Profile Comparison</h4>
-            <canvas id="crimeRadarChart" height="220"></canvas>
+        
+
+            <canvas id="crimeSeverityLineChart" height="220"></canvas>
         </div>
 
     </div>
 
-    <!-- INSIGHT BOX -->
+    <!-- ================= INSIGHTS ================= -->
     <div class="comparison-insight">
-        <h3> Key Insights</h3>
+        <h3>Key Insights</h3>
         <p id="comparisonInsightText">
             Select a state to generate comparison insights.
         </p>
     </div>
 
-    <!-- FOOTER -->
     <div class="comparison-footer">
         <small>
             Source: NCRB | Period: 2020–2022 | Methodology: Cluster-based benchmarking
@@ -181,76 +152,23 @@
     </div>
 
 </div>
-    
-    
-
 
 <!-- ================= MAPS ================= -->
 <div id="maps" class="tab-content">
     <h2>Advanced Maps</h2>
-    <p>
-        Thematic maps including severity dominance, policy priority zones,
-        and inter-state inequality analysis.
-    </p>
 </div>
 
 <!-- ================= ML ================= -->
 <div id="ml" class="tab-content">
     <h2>Machine Learning Insights</h2>
-    <p>
-        Cluster-based state grouping and feature importance
-        for evidence-based policy planning.
-    </p>
 </div>
 
 <!-- ================= POLICY ================= -->
 <div id="policy" class="tab-content">
-
     <h2>Policy & Legal Framework</h2>
-
-    <p>
-        This section provides legal context and data-driven policy prioritization
-        based on crime severity, investigation efficiency, and violence indicators.
-    </p>
-
-    <!-- ================= POLICY PRIORITY SUMMARY (DYNAMIC) ================= -->
-    <div id="policySummary" class="policy-box">
-        <p>
-            Select a state from the dropdown or click a state on the map
-            to view policy priority insights.
-        </p>
-    </div>
-
-    <!-- ================= POLICY PRIORITY LEGEND ================= -->
-    <h3>Policy Priority Levels</h3>
-    <ul>
-        <li><strong>🔴 Critical Priority</strong> – High crime, low chargesheeting, high violence</li>
-        <li><strong>🟠 High Priority</strong> – Crime pressure with justice gaps</li>
-        <li><strong>🟡 Moderate Priority</strong> – Emerging crime risks</li>
-        <li><strong>🟢 Low Priority</strong> – Stable law & order</li>
-    </ul>
-
-    <!-- ================= LEGAL CONTEXT ================= -->
-    <h3>Key IPC Sections</h3>
-    <ul>
-        <li><strong>IPC 302</strong> – Murder</li>
-        <li><strong>IPC 363–369</strong> – Kidnapping & Abduction</li>
-        <li><strong>IPC 376</strong> – Sexual Offences</li>
-        <li><strong>IPC 307</strong> – Attempt to Murder</li>
-    </ul>
-
-    <!-- ================= POLICY RECOMMENDATIONS ================= -->
-    <h3>Recommended Policy Actions</h3>
-    <ul>
-        <li>Urban-focused policing for high-risk districts</li>
-        <li>Improve investigation quality and chargesheeting timelines</li>
-        <li>Strengthen inter-state coordination for organized crime</li>
-        <li>Cluster-based crime prevention strategies</li>
-    </ul>
-
 </div>
 
-
 <script src="script.js"></script>
+<script src="comparison.js"></script>
 </body>
 </html>

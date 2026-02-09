@@ -36,6 +36,115 @@ function standardizeState(name) {
 }
 
 /************************************************
+ * COMPARISON SUBTITLE (FEATURE 1)
+ ************************************************/
+function updateComparisonSubtitle() {
+    const state =
+        document.getElementById("stateSelect")?.value || "Selected State";
+
+    const mode =
+        document.getElementById("benchmarkMode")?.value || "national";
+
+    let benchmarkText =
+        mode === "national"
+            ? "National Average"
+            : mode === "cluster"
+            ? "Cluster Average"
+            : "Peer States (Similar IPC)";
+
+    document.getElementById("comparisonSubtitle").innerHTML =
+        `Comparing <strong>${state}</strong> with ${benchmarkText} (2022)`;
+}
+/************************************************
+ * BENCHMARK COMPUTATION (FEATURE 2)
+ ************************************************/
+
+/* --- NATIONAL AVERAGE --- */
+function getNationalBenchmark() {
+    // Prefer explicit All India row if present
+    const indiaRow = crimeData.find(d =>
+        d.state_ut && d.state_ut.toLowerCase().includes("india")
+    );
+
+    if (indiaRow) return indiaRow;
+
+    // Fallback: mean of all states
+    const states = crimeData.filter(
+        d => d.state_ut && !d.state_ut.toLowerCase().includes("total")
+    );
+
+    return computeAverage(states);
+}
+
+/* --- CLUSTER AVERAGE --- */
+function getClusterBenchmark(selectedRow) {
+    const cluster = getCluster(selectedRow);
+
+    const clusterStates = crimeData.filter(d =>
+        d.state_ut &&
+        getCluster(d) === cluster
+    );
+
+    return computeAverage(clusterStates);
+}
+
+/* --- PEER STATES (±50 IPC) --- */
+function getPeerBenchmark(selectedRow) {
+    const ipc = Number(selectedRow["Rate of Cognizable Crimes (IPC) (2022)"]);
+
+    const peers = crimeData.filter(d => {
+        const v = Number(d["Rate of Cognizable Crimes (IPC) (2022)"]);
+        return (
+            d.state_ut &&
+            Math.abs(v - ipc) <= 50 &&
+            standardizeState(d.state_ut) !== standardizeState(selectedRow.state_ut)
+        );
+    });
+
+    return peers.length ? computeAverage(peers) : null;
+}
+
+/* --- GENERIC AVERAGE CALCULATOR --- */
+function computeAverage(rows) {
+    const avg = (key) => {
+        const vals = rows
+            .map(r => Number(r[key]))
+            .filter(v => !isNaN(v));
+        return vals.length
+            ? vals.reduce((a, b) => a + b, 0) / vals.length
+            : null;
+    };
+
+    return {
+        ipc: avg("Rate of Cognizable Crimes (IPC) (2022)"),
+        murder: avg("murder_rate_2022"),
+        charge: avg("Chargesheeting Rate (2022)")
+    };
+}
+function getBenchmarkForState(state) {
+    const selectedRow = crimeData.find(
+        d => standardizeState(d.state_ut) === standardizeState(state)
+    );
+    if (!selectedRow) return null;
+
+    const mode = document.getElementById("benchmarkMode").value;
+
+    if (mode === "national") {
+        return getNationalBenchmark();
+    }
+
+    if (mode === "cluster") {
+        return getClusterBenchmark(selectedRow);
+    }
+
+    if (mode === "peers") {
+        return getPeerBenchmark(selectedRow);
+    }
+
+    return null;
+}
+
+/************************************************
  * LOAD DATA
  ************************************************/
 fetch("data/master.csv")
@@ -50,6 +159,7 @@ fetch("data/master.csv")
         populateDropdown();
         initMap();
         updateKPIs("Delhi");
+        updateComparisonSubtitle();
     })
     .catch(err => console.error("CSV load error:", err));
 
@@ -71,7 +181,15 @@ function populateDropdown() {
         });
 
     select.value = "Delhi";
-    select.onchange = () => updateKPIs(select.value);
+
+    select.onchange = () => {
+        updateKPIs(select.value);
+        updateComparisonSubtitle();
+    };
+
+    document.getElementById("benchmarkMode").onchange = () => {
+        updateComparisonSubtitle();
+    };
 }
 
 /************************************************
@@ -253,6 +371,7 @@ function onEachFeature(feature, layer) {
         click: () => {
             updateKPIs(state);
             document.getElementById("stateSelect").value = state;
+            updateComparisonSubtitle();
         }
     });
 
@@ -328,4 +447,35 @@ function updateLegend() {
     };
 
     legend.addTo(map);
+}
+/************************************************
+ * TAB SWITCHING LOGIC (FIX)
+ ************************************************/
+function openTab(tabId, event) {
+    // Hide all tabs
+    document.querySelectorAll(".tab-content").forEach(tab => {
+        tab.classList.remove("active");
+    });
+
+    // Remove active state from all buttons
+    document.querySelectorAll(".tab-button").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    // Show selected tab
+    document.getElementById(tabId).classList.add("active");
+
+    // Activate clicked button
+    event.currentTarget.classList.add("active");
+    
+    // Resize map properly when switching to overview
+    if (tabId === "overview" && map) {
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 200);
+    }
+    // ✅ ADD THIS PART (Feature 3 trigger)
+    if (tabId === "comparison" && typeof onComparisonTabActivated === "function") {
+        onComparisonTabActivated();
+    }
 }

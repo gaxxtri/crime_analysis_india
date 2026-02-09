@@ -1,3 +1,6 @@
+/* =================================================
+   GLOBAL
+================================================= */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
@@ -5,14 +8,29 @@ body {
     color: #222;
 }
 
-/* ================= HEADER ================= */
+/* =================================================
+   HEADER
+================================================= */
 header {
     background: #0b3c5d;
     color: white;
     padding: 20px 30px;
 }
 
-/* ================= TABS ================= */
+header h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+header p {
+    margin-top: 6px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* =================================================
+   TABS
+================================================= */
 .tabs {
     display: flex;
     background: #e1e5ea;
@@ -25,6 +43,7 @@ header {
     background: none;
     cursor: pointer;
     font-weight: 600;
+    font-size: 14px;
 }
 
 .tab-button.active {
@@ -32,7 +51,9 @@ header {
     border-bottom: 3px solid #0b3c5d;
 }
 
-/* ================= CONTENT ================= */
+/* =================================================
+   TAB CONTENT
+================================================= */
 .tab-content {
     display: none;
     padding: 25px;
@@ -43,14 +64,22 @@ header {
     display: block;
 }
 
-/* ================= CONTROLS ================= */
+/* =================================================
+   OVERVIEW CONTROLS
+================================================= */
 .controls {
     display: flex;
     gap: 30px;
     margin: 15px 0 20px;
 }
 
-/* ================= KPI CARDS ================= */
+.controls label {
+    font-weight: 600;
+}
+
+/* =================================================
+   KPI CARDS
+================================================= */
 .kpi-container {
     display: flex;
     gap: 15px;
@@ -66,35 +95,19 @@ header {
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
+.kpi-card h3 {
+    margin: 0 0 8px;
+    font-size: 14px;
+}
+
 .kpi-value {
     font-size: 24px;
     font-weight: bold;
 }
 
-/* KPI BADGES (CLUSTERS) */
-.kpi-badge {
-    display: inline-block;
-    padding: 6px 10px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-}
-
-.cluster-high {
-    background: #d73027;
-}
-
-.cluster-moderate {
-    background: #fc8d59;
-}
-
-.cluster-low {
-    background: #91cf60;
-    color: #1b5e20;
-}
-
-/* ================= MAP ================= */
+/* =================================================
+   MAP
+================================================= */
 #map {
     height: 520px;
     width: 100%;
@@ -102,79 +115,97 @@ header {
     border-radius: 8px;
 }
 
-/* ================= LEGEND ================= */
-.legend {
-    background: white;
-    padding: 10px;
-    line-height: 18px;
-    font-size: 13px;
-    color: #333;
-    box-shadow: 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 5px;
-}
-
-.legend i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.8;
-}
-.policy-box {
-    background: #f8f9fa;
-    border-left: 5px solid #0b3c5d;
-    padding: 15px 20px;
-    margin: 15px 0;
-    font-size: 14px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
-
-/* ================= INSIGHT / POLICY BOXES ================= */
-.insight-box {
-    background: #f1f5f9;
-    border-left: 4px solid #0b3c5d;
-    padding: 15px;
-    margin: 15px 0;
-    font-size: 14px;
-}
-
-/* ================= CHARTS ================= */
-canvas {
-    max-width: 900px;
-}
-
-/* ===============================
-   STATE COMPARISON TAB
-================================ */
-
+/* =================================================
+   STATE COMPARISON — HEADER
+================================================= */
 .comparison-header {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1e5ea;
 }
 
 .comparison-header h2 {
-    margin-bottom: 5px;
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1f2d3d;
 }
 
-.comparison-controls {
-    margin: 15px 0 20px;
+.comparison-header p {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #555;
 }
 
-.comparison-controls select {
-    padding: 6px 10px;
-    margin-left: 8px;
+/* =================================================
+   STATE COMPARISON — CONTROLS GRID (FINAL)
+================================================= */
+.comparison-controls-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 40px;
+    margin: 20px 0 30px;
+    padding: 16px;
+    background: #f8fafc;
+    border-left: 4px solid #0b3c5d;
+    border-radius: 6px;
 }
 
+.control-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.control-group label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.control-group select {
+    padding: 6px 8px;
+    font-size: 14px;
+    max-width: 260px;
+}
+
+.control-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.control-group.right-align {
+    align-items: flex-end;
+}
+
+.control-group.right-align select {
+    width: 320px;
+}
+
+#multiStateSelect {
+    height: 160px;
+}
+
+/* =================================================
+   STATE COMPARISON — GRID
+================================================= */
 .comparison-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 25px;
 }
 
+/* =================================================
+   PANELS
+================================================= */
 .comparison-panel {
     background: #ffffff;
     padding: 18px;
     border-radius: 6px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.comparison-panel h3 {
+    margin-top: 0;
+    font-size: 18px;
 }
 
 .panel-subtitle {
@@ -183,6 +214,9 @@ canvas {
     margin-bottom: 10px;
 }
 
+/* =================================================
+   DELTA STRIP
+================================================= */
 .delta-strip {
     display: flex;
     justify-content: space-between;
@@ -197,16 +231,52 @@ canvas {
     white-space: nowrap;
 }
 
+/* =================================================
+   INSIGHT BOX
+================================================= */
 .comparison-insight {
     margin-top: 25px;
-    padding: 15px;
+    padding: 15px 20px;
     background: #f8fafc;
     border-left: 5px solid #0b3c5d;
     font-size: 15px;
 }
 
+/* =================================================
+   FOOTER
+================================================= */
 .comparison-footer {
     margin-top: 15px;
     color: #666;
     font-size: 12px;
+    text-align: right;
+}
+
+/* =================================================
+   CHARTS
+================================================= */
+canvas {
+    max-width: 100%;
+}
+
+/* =================================================
+   MAP LEGEND (FIXED)
+================================================= */
+.leaflet-control.legend {
+    background: white;
+    padding: 10px 12px;
+    line-height: 18px;
+    font-size: 13px;
+    color: #333;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    border-radius: 6px;
+    z-index: 1000;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.8;
 }
