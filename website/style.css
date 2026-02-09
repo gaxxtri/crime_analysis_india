@@ -1,0 +1,212 @@
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    background: #f4f6f8;
+    color: #222;
+}
+
+/* ================= HEADER ================= */
+header {
+    background: #0b3c5d;
+    color: white;
+    padding: 20px 30px;
+}
+
+/* ================= TABS ================= */
+.tabs {
+    display: flex;
+    background: #e1e5ea;
+    border-bottom: 1px solid #ccc;
+}
+
+.tab-button {
+    padding: 12px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.tab-button.active {
+    background: white;
+    border-bottom: 3px solid #0b3c5d;
+}
+
+/* ================= CONTENT ================= */
+.tab-content {
+    display: none;
+    padding: 25px;
+    background: white;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ================= CONTROLS ================= */
+.controls {
+    display: flex;
+    gap: 30px;
+    margin: 15px 0 20px;
+}
+
+/* ================= KPI CARDS ================= */
+.kpi-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.kpi-card {
+    background: white;
+    padding: 15px;
+    width: 210px;
+    border-left: 4px solid #0b3c5d;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.kpi-value {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* KPI BADGES (CLUSTERS) */
+.kpi-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+}
+
+.cluster-high {
+    background: #d73027;
+}
+
+.cluster-moderate {
+    background: #fc8d59;
+}
+
+.cluster-low {
+    background: #91cf60;
+    color: #1b5e20;
+}
+
+/* ================= MAP ================= */
+#map {
+    height: 520px;
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 8px;
+}
+
+/* ================= LEGEND ================= */
+.legend {
+    background: white;
+    padding: 10px;
+    line-height: 18px;
+    font-size: 13px;
+    color: #333;
+    box-shadow: 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 5px;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.8;
+}
+.policy-box {
+    background: #f8f9fa;
+    border-left: 5px solid #0b3c5d;
+    padding: 15px 20px;
+    margin: 15px 0;
+    font-size: 14px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* ================= INSIGHT / POLICY BOXES ================= */
+.insight-box {
+    background: #f1f5f9;
+    border-left: 4px solid #0b3c5d;
+    padding: 15px;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+/* ================= CHARTS ================= */
+canvas {
+    max-width: 900px;
+}
+
+/* ===============================
+   STATE COMPARISON TAB
+================================ */
+
+.comparison-header {
+    margin-bottom: 15px;
+}
+
+.comparison-header h2 {
+    margin-bottom: 5px;
+}
+
+.comparison-controls {
+    margin: 15px 0 20px;
+}
+
+.comparison-controls select {
+    padding: 6px 10px;
+    margin-left: 8px;
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.comparison-panel {
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.panel-subtitle {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.delta-strip {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    padding: 10px;
+    background: #f1f5f9;
+    font-size: 13px;
+    border-left: 4px solid #0b3c5d;
+}
+
+.delta-strip span {
+    white-space: nowrap;
+}
+
+.comparison-insight {
+    margin-top: 25px;
+    padding: 15px;
+    background: #f8fafc;
+    border-left: 5px solid #0b3c5d;
+    font-size: 15px;
+}
+
+.comparison-footer {
+    margin-top: 15px;
+    color: #666;
+    font-size: 12px;
+}
