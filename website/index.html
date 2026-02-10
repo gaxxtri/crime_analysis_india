@@ -242,16 +242,274 @@
     </div>
 
 </div>
+</div> <!-- END OF MAPS TAB -->
 
-<!-- ================= ML ================= -->
+<!-- ================= ML INSIGHTS ================= -->
 <div id="ml" class="tab-content">
+
     <h2>Machine Learning Insights</h2>
+
+    <p class="section-subtitle">
+        Unsupervised learning and dimensionality reduction to identify structural crime patterns
+    </p>
+
+    <label><strong>Select ML Visualization:</strong></label><br><br>
+
+    <select id="mlSelect" onchange="updateMLChart()">
+        <option value="parallel_coords">Parallel Coordinates</option>
+        <option value="pca_projection">PCA Projection</option>
+        <option value="kmeans_clusters">K-Means Clustering</option>
+        <option value="hierarchical">Hierarchical Clustering</option>
+    </select>
+
+    <h3 id="mlChartTitle" style="margin-top:20px;"></h3>
+
+    <img id="mlChartImage" class="policy-chart-image"/>
+
+    <div class="policy-insight-box">
+        <p id="mlChartInsight"></p>
+        <ul id="mlChartImplications"></ul>
+    </div>
+    <!-- ================= ML FINDINGS & POLICY INTERPRETATION ================= -->
+<div class="ml-findings-section">
+
+    <h3>ML Findings & Policy Interpretation</h3>
+
+    <p class="section-subtitle">
+        Structural crime patterns and institutional insights derived from unsupervised learning techniques
+    </p>
+
+    <div class="policy-insight-box">
+
+        <h4>State-wise Crime Pattern Interpretation</h4>
+        <p>
+            Machine learning–assisted analysis indicates that a limited subset of states accounts for a
+            disproportionately high share of IPC crimes. These states are typically characterised by
+            higher levels of urbanisation, population density, and economic activity.
+        </p>
+        <ul>
+            <li>High IPC crime rates cluster in urbanised and economically active regions.</li>
+            <li>Urban centres show higher crime reporting, policing visibility, and demographic pressure.</li>
+            <li>Crime concentration reflects structural and demographic realities rather than governance failure alone.</li>
+        </ul>
+
+        <h4>Crime Severity vs Crime Volume</h4>
+        <p>
+            Comparative analysis of murder rates against overall IPC crime rates reveals that some states
+            with moderate crime volumes exhibit disproportionately higher violent crime, while other
+            high-volume crime states are dominated by non-violent IPC offences.
+        </p>
+        <p class="policy-note">
+            Crime severity and crime volume represent distinct dimensions and should not be conflated in policy design.
+        </p>
+
+        <h4>Kidnapping, Recovery, and Survivor Outcomes</h4>
+        <p>
+            ML-supported pattern analysis of kidnapping and abduction data shows substantial inter-state
+            variation in recovery outcomes. Child victims form a significant proportion of recovered
+            individuals, while marriage-related, labour-related, and trafficking-related cases dominate
+            purpose-wise patterns.
+        </p>
+        <p class="policy-note">
+            Higher recovery rates reflect effective early response and coordination, while unrecovered
+            cases point to inter-state trafficking networks and investigative delays.
+        </p>
+
+        <h4>Justice System Effectiveness (Chargesheeting)</h4>
+        <p>
+            States exhibiting high crime rates alongside low chargesheeting efficiency form structurally
+            vulnerable clusters within the ML analysis.
+        </p>
+        <p class="policy-note">
+            Chargesheeting rate emerges as a critical institutional performance indicator reflecting
+            investigation quality, case management capacity, and justice system throughput.
+        </p>
+
+        <h4>Feature Importance & Structural Drivers</h4>
+        <ul>
+            <li><strong>Urbanisation rate</strong> is the strongest explanatory variable influencing IPC crime variation.</li>
+            <li><strong>Murder rate</strong> captures crime severity dynamics.</li>
+            <li><strong>Chargesheeting rate</strong> reflects institutional response and enforcement capacity.</li>
+            <li><strong>Literacy rate</strong> exhibits an indirect stabilising influence on crime patterns.</li>
+        </ul>
+
+        <h4>Cluster-Based Governance Insight</h4>
+        <p>
+            Clustering analysis groups states into distinct crime–demographic typologies, including
+            high crime–high urbanisation clusters, moderate crime–moderate urbanisation clusters,
+            and low crime–low urbanisation clusters.
+        </p>
+        <p class="policy-note">
+            Cluster-level similarities indicate that profile-based and region-specific strategies are
+            more effective than uniform national interventions.
+        </p>
+
+        <h4>Limitations</h4>
+        <ul>
+            <li>Official crime data may underestimate true crime incidence due to under-reporting.</li>
+            <li>Census-based demographic indicators may not fully reflect current socio-economic conditions.</li>
+            <li>Analysis focuses on inter-state patterns and does not capture district-level variation.</li>
+            <li>Machine learning models are exploratory and explanatory in nature, not predictive.</li>
+        </ul>
+
+    </div>
+
 </div>
+
+</div>
+
+
 
 <!-- ================= POLICY ================= -->
+<!-- ================= POLICY & LAW ================= -->
 <div id="policy" class="tab-content">
+
     <h2>Policy & Legal Framework</h2>
+
+    <p class="section-subtitle">
+        Translating crime data insights into legal, institutional, and governance responses
+    </p>
+
+    <!-- ================= LEGAL FRAMEWORK ================= -->
+    <h3>1. Core Legal Framework Governing Crime in India</h3>
+
+    <ul class="policy-list">
+        <li><strong>Indian Penal Code (IPC):</strong> Defines criminal offences and associated penalties.</li>
+        <li><strong>Code of Criminal Procedure (CrPC):</strong> Governs investigation, arrest, prosecution, and trial processes.</li>
+        <li><strong>Indian Evidence Act:</strong> Regulates admissibility and evaluation of evidence.</li>
+        <li><strong>State Police Acts:</strong> Determine policing structure and operational autonomy at the state level.</li>
+    </ul>
+
+    <p class="policy-note">
+        While criminal law is largely centralised, enforcement capacity and justice outcomes vary significantly across states.
+    </p>
+
+    <!-- ================= INSTITUTIONAL ROLES ================= -->
+    <h3>2. Institutional Responsibilities</h3>
+
+    <div class="policy-grid">
+
+        <div class="policy-card">
+            <h4>Police & Investigation</h4>
+            <p>
+                Responsible for crime registration, investigation quality, evidence collection,
+                and chargesheet submission.
+            </p>
+        </div>
+
+        <div class="policy-card">
+            <h4>Prosecution</h4>
+            <p>
+                Evaluates evidence, conducts trials, and ensures procedural compliance
+                between police and judiciary.
+            </p>
+        </div>
+
+        <div class="policy-card">
+            <h4>Judiciary</h4>
+            <p>
+                Adjudicates cases, ensures due process, and determines conviction outcomes.
+            </p>
+        </div>
+
+        <div class="policy-card">
+            <h4>State Governments</h4>
+            <p>
+                Allocate resources, set policing priorities, and implement justice reforms.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- ================= DATA-LINKED POLICY GAPS ================= -->
+    <h3>3. Policy Gaps Highlighted by Data</h3>
+
+    <ul class="policy-list">
+        <li>
+            <strong>High crime–low chargesheeting states</strong> indicate investigative capacity constraints rather than
+            absence of legal provisions.
+        </li>
+        <li>
+            <strong>Persistent conviction gaps</strong> suggest delays, evidentiary weaknesses,
+            and judicial workload pressures.
+        </li>
+        <li>
+            <strong>Urban–rural reporting differences</strong> reflect access and trust asymmetries
+            rather than true crime absence.
+        </li>
+        <li>
+            <strong>Cluster-based risk patterns</strong> show that crime outcomes emerge from combined social,
+            institutional, and demographic factors.
+        </li>
+    </ul>
+
+    <!-- ================= POLICY RECOMMENDATIONS ================= -->
+    <h3>4. Data-Informed Policy Recommendations</h3>
+
+    <div class="policy-grid">
+
+        <div class="policy-card highlight">
+            <h4>Strengthen Investigation Capacity</h4>
+            <ul>
+                <li>Expand forensic infrastructure and training</li>
+                <li>Standardise investigation timelines</li>
+                <li>Digitise case tracking systems</li>
+            </ul>
+        </div>
+
+        <div class="policy-card highlight">
+            <h4>Improve Prosecution Outcomes</h4>
+            <ul>
+                <li>Early prosecutor involvement in investigations</li>
+                <li>Specialised prosecution units for serious crimes</li>
+                <li>Witness protection mechanisms</li>
+            </ul>
+        </div>
+
+        <div class="policy-card highlight">
+            <h4>Targeted State-Level Interventions</h4>
+            <ul>
+                <li>Cluster-based resource allocation</li>
+                <li>Urban policing reforms for high-density regions</li>
+                <li>Community policing in under-reported areas</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- ================= IMPLEMENTATION LENS ================= -->
+    <h3>5. Implementation Lens</h3>
+
+    <table class="policy-table">
+        <thead>
+            <tr>
+                <th>Time Horizon</th>
+                <th>Policy Focus</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Short-Term</td>
+                <td>Investigation training, digital FIRs, fast-track courts</td>
+            </tr>
+            <tr>
+                <td>Medium-Term</td>
+                <td>Forensic expansion, prosecution coordination, data integration</td>
+            </tr>
+            <tr>
+                <td>Long-Term</td>
+                <td>Institutional reforms, social prevention strategies, justice accessibility</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="policy-footer">
+        This section synthesises crime analytics with India’s legal and institutional context to support
+        evidence-informed policymaking rather than prescriptive legal interpretation.
+    </p>
+
 </div>
+
 
 <script src="script.js"></script>
 <script src="comparison.js"></script>

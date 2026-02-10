@@ -741,3 +741,73 @@ document.addEventListener("DOMContentLoaded", () => {
         updatePolicyChart();
     }
 });
+/************************************************
+ * ML INSIGHTS (STATIC, POLICY-GRADE)
+ ************************************************/
+
+const mlCharts = {
+    parallel_coords: {
+        title: "Parallel Coordinates: Crime & Socio-Demographic Indicators",
+        image: "ml_chart/parallel.png",
+        insight:
+            "States exhibit distinct multi-dimensional crime profiles when crime rates, literacy, urbanization, and murder rates are jointly examined, highlighting the interaction of socio-demographic drivers.",
+        implications: [
+            "Avoid single-metric policy decisions",
+            "Design composite indicator-based interventions",
+            "Use multi-factor profiling for crime prevention"
+        ]
+    },
+
+    pca_projection: {
+        title: "PCA Projection of Crime & Justice Indicators",
+        image: "ml_chart/pca.png",
+        insight:
+            "Principal Component Analysis reveals that a limited number of latent dimensions explain most inter-state variation in crime and justice indicators, indicating structurally driven crime dynamics.",
+        implications: [
+            "Target high-impact structural drivers",
+            "Reduce fragmented indicator-based policymaking",
+            "Use PCA components for composite policy indices"
+        ]
+    },
+
+    kmeans_clusters: {
+        title: "K-Means Clustering: Crime Risk Typologies",
+        image: "ml_chart/kmeans.png",
+        insight:
+            "States cluster into distinct crime–justice typologies, separating high-crime low-efficiency regions from relatively stable institutional environments.",
+        implications: [
+            "Adopt cluster-specific policy interventions",
+            "Target high-risk clusters with integrated reforms",
+            "Avoid one-size-fits-all national strategies"
+        ]
+    },
+
+    hierarchical: {
+        title: "Hierarchical Clustering of States",
+        image: "ml_chart/hier.png",
+        insight:
+            "Hierarchical clustering highlights deep structural similarities across states, suggesting shared institutional and socio-economic conditions influencing crime outcomes.",
+        implications: [
+            "Encourage inter-state policy learning",
+            "Replicate best practices across similar clusters",
+            "Plan structure-based, not geography-based reforms"
+        ]
+    }
+};
+
+function updateMLChart() {
+    const select = document.getElementById("mlSelect");
+    const data = mlCharts[select.value];
+
+    document.getElementById("mlChartTitle").innerText = data.title;
+    document.getElementById("mlChartImage").src = data.image;
+    document.getElementById("mlChartInsight").innerText = data.insight;
+
+    const ul = document.getElementById("mlChartImplications");
+    ul.innerHTML = "";
+    data.implications.forEach(item => {
+        const li = document.createElement("li");
+        li.innerText = item;
+        ul.appendChild(li);
+    });
+}
