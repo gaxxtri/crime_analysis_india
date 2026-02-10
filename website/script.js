@@ -479,3 +479,265 @@ function openTab(tabId, event) {
         onComparisonTabActivated();
     }
 }
+/************************************************
+ * POLICY MAPS (STATIC, DASHBOARD-GRADE)
+ * Used ONLY in the "Maps" tab
+ ************************************************/
+
+const policyMaps = {
+    ipc_rate: {
+        title: "IPC Crime Rate by State",
+        image: "maps/ipc_rate.png",
+        insight:
+            "Persistently high IPC crime rates are observed across several northern and central states, suggesting structural and socio-economic risk factorsrather than short-term or event-driven crime fluctuations.",
+        implications: [
+            "Prioritise long-term preventive interventions alongside routine law enforcement.",
+            "Integrate crime prevention with social welfare, education, and employment programmes.",
+            "Strengthen institutional capacity at the district and state levels."
+        ]
+    },
+
+    murder_rate: {
+        title: "Murder Rate Across Indian States",
+        image: "maps/murder_rate.png",
+        insight:
+            "Elevated murder rates are concentrated in a limited number of states and do not uniformly align with overall IPC crime intensity.",
+        implications: [
+            "Design targeted strategies for violent crime reduction.",
+            "Address local conflict drivers and organised crime networks.",
+            "Enhance intelligence-led policing in high-severity regions."
+        ]
+    },
+
+    chargesheet_efficiency: {
+        title: "Chargesheet Completion Efficiency",
+        image: "maps/chargesheet_efficiency.png",
+        insight:
+            "Several states with high registered crime levels display comparatively low chargesheet completion rates , indicating investigation and case-processing constraints.",
+        implications: [
+            "Invest in investigative training and forensic infrastructure.",
+            "Reduce procedural delays through standardised timelines.",
+            "Improve coordination between police and prosecution agencies."
+        ]
+    },
+
+    conviction_gap: {
+        title: "Conviction Gap Across States",
+        image: "maps/conviction_gap.png",
+        insight:
+            "Significant conviction gaps persist across multiple regions, reflecting judicial inefficiencies within judicial processes.",
+        implications: [
+            "Strengthen case tracking and judicial workload management.",
+            "Expand fast-track courts for serious and high-volume offences.",
+            "Improve evidence quality and witness protection mechanisms."
+        ]
+    },
+
+    urban_rural: {
+        title: "Urban–Rural Crime Distribution",
+        image: "maps/urban_rural.png",
+        insight:
+            "Urban areas record higher crime density, while rural regions show lower reported rates due to reporting access differences.",
+        implications: [
+            "Adopt differentiated policing strategies for urban and rural areas.",
+            "Improve crime reporting accessibility in rural regions.",
+            "Expand community policing and victim outreach programmes."
+        ]
+    },
+
+    crime_clusters: {
+        title: "State-Level Crime Risk Clusters",
+        image: "maps/crime_clusters.png",
+        insight:
+            "Crime–justice clustering identifies states where high crime coincides with weaker justice outcomes.",
+        implications: [
+            "Use cluster-based targeting for policy prioritisation.",
+            "Coordinate reforms across policing, prosecution, and judiciary.",
+            "Allocate resources based on composite risk profiles."
+        ]
+    }
+};
+
+
+function updatePolicyMap() {
+    const select = document.getElementById("mapSelect");
+    if (!select) return;
+
+    const data = policyMaps[select.value];
+    if (!data) return;
+
+    document.getElementById("policyMapTitle").innerText = data.title;
+    document.getElementById("policyMapImage").src = data.image;
+    document.getElementById("policyMapInsight").innerText = data.insight;
+
+    const ul = document.getElementById("policyImplications");
+    ul.innerHTML = "";
+    data.implications.forEach(item => {
+        const li = document.createElement("li");
+        li.innerText = item;
+        ul.appendChild(li);
+    });
+}
+/************************************************
+ * POLICY CHARTS (STATIC, POLICY-GRADE)
+ * Used inside the "Maps" tab → Analytical Charts
+ ************************************************/
+
+const policyCharts = {
+    top_ipc_states: {
+        title: "Top 10 States by IPC Crimes",
+        image: "charts/states_IPC.png",
+        insight:
+            "A small number of states contribute disproportionately to total IPC crime volume, reflecting concentrated governance and enforcement pressure in specific regions.",
+        implications: [
+            "Prioritise resource allocation to high-burden states.",
+            "Strengthen district-level policing capacity in populous regions.",
+            "Adopt differentiated strategies for high-volume crime states."
+        ]
+    },
+
+    ipc_trends: {
+        title: "IPC Crime Trends (2020–2022)",
+        image: "charts/ipc_trend.png",
+        insight:
+            "IPC crime trends across major states remain structurally stable over time, indicating persistent systemic drivers rather than temporary fluctuations.",
+        implications: [
+            "Focus on long-term crime prevention strategies.",
+            "Track multi-year performance benchmarks.",
+            "Align crime policy with socio-economic planning cycles."
+        ]
+    },
+//tree
+    ipc_treemap: {
+         title: "IPC Crime Concentration Across Top States",
+         image: "charts/tree.png",
+        insight:
+             "IPC crime burden is heavily concentrated among a small group of states, with a few regions accounting for a dominant share of national crime volume.",
+         implications: [
+             "Adopt targeted national crime reduction strategies focused on high-burden states.",
+             "Prioritise fiscal and institutional support to states with concentrated crime loads.",
+             "Use crime concentration metrics for inter-state resource allocation."
+        ]
+    },
+    crime_share: {
+        title: "Share of IPC Crimes: Top States vs Others",
+        image: "charts/pie.png",
+        insight:
+            "More than half of IPC crimes are concentrated in a limited number of states, highlighting uneven crime distribution nationwide.",
+        implications: [
+            "Adopt targeted funding models instead of uniform allocation.",
+            "Focus national crime strategies on hotspot states.",
+            "Improve inter-state capacity balancing."
+        ]
+    },
+
+    urban_vs_ipc: {
+        title: "Urbanization vs IPC Crime Rate",
+        image: "charts/urb_vs_ipc.png",
+        insight:
+            "Higher levels of urbanization are generally associated with increased registered crime rates, reflecting density effects and reporting access.",
+        implications: [
+            "Strengthen urban policing infrastructure.",
+            "Address migration-driven urban vulnerabilities.",
+            "Expand surveillance and situational crime prevention."
+        ]
+    },
+
+    charge_vs_ipc: {
+        title: "Chargesheeting vs IPC Crime Rate",
+        image: "charts/chargesheeting.png",
+        insight:
+            "High crime rates do not consistently correspond with higher chargesheeting efficiency, indicating investigation bottlenecks in high-pressure states.",
+        implications: [
+            "Enhance investigative staffing in high-crime regions.",
+            "Reduce case backlogs through process optimisation.",
+            "Improve police–prosecution coordination."
+        ]
+    },
+
+    ipc_urban_dist: {
+        title: "IPC Crime Distribution by Urbanization",
+        image: "charts/urban_distri.png",
+        insight:
+            "Urban states display wider and higher crime rate distributions, while rural regions show lower but more compressed reported crime ranges.",
+        implications: [
+            "Adopt differentiated policing strategies by settlement type.",
+            "Improve crime reporting accessibility in rural regions.",
+            "Tailor enforcement models to spatial context."
+        ]
+    },
+//radar
+    state_radar: {
+        title: "State Crime Profile: Multi-Dimensional Indicator View",
+        image: "charts/radar.png",
+        insight:
+              "State-level crime profiles reveal imbalances across crime intensity, justice efficiency, and socio-demographic indicators, underscoring uneven governance outcomes.",
+        implications: [
+            "Use radar-based profiling for state-specific policy diagnostics.",
+            "Identify mismatches between crime burden and justice capacity.",
+            "Support customised reform strategies instead of uniform interventions."
+        ]
+    },
+
+//corr
+    crime_correlation: {
+        title: "Correlation Between Crime, Demographic and Justice Indicators",
+        image: "charts/correl.png",
+        insight:
+             "Crime rates exhibit moderate correlation with urbanisation and literacy, while chargesheeting efficiency shows a weak or negative association with crime intensity.",
+        implications: [
+             "Avoid single-factor explanations for crime dynamics.",
+             "Design multi-dimensional crime prevention policies.",
+             "Use composite indicators for crime risk and justice performance assessment."
+        ]
+    },
+
+
+    ipc_vs_murder: {
+        title: "IPC Crime Rate vs Murder Rate",
+        image: "charts/ipc_vs_murder.png",
+        insight:
+            "States with high IPC crime rates do not always exhibit high murder rates, indicating distinct dynamics for violent crime.",
+        implications: [
+            "Separate strategies for volume crime and violent crime.",
+            "Deploy specialised units for violent crime prevention.",
+            "Use severity-based crime classification in planning."
+        ]
+    }
+};
+
+
+/************************************************
+ * UPDATE CHART HANDLER
+ ************************************************/
+function updatePolicyChart() {
+    const select = document.getElementById("chartSelect");
+    if (!select) return;
+
+    const data = policyCharts[select.value];
+    if (!data) return;
+
+    document.getElementById("policyChartTitle").innerText = data.title;
+    document.getElementById("policyChartImage").src = data.image;
+    document.getElementById("policyChartImage").alt = data.title;
+    document.getElementById("policyChartInsight").innerText = data.insight;
+
+    const ul = document.getElementById("policyChartImplications");
+    ul.innerHTML = "";
+
+    data.implications.forEach(item => {
+        const li = document.createElement("li");
+        li.innerText = item;
+        ul.appendChild(li);
+    });
+}
+
+
+/************************************************
+ * DEFAULT LOAD
+ ************************************************/
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById("chartSelect")) {
+        updatePolicyChart();
+    }
+});

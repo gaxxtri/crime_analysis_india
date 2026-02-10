@@ -155,7 +155,92 @@
 
 <!-- ================= MAPS ================= -->
 <div id="maps" class="tab-content">
-    <h2>Advanced Maps</h2>
+
+    <!-- ================= MAP SECTION ================= -->
+    <h2>Advanced Crime Maps</h2>
+
+    <p class="section-subtitle">
+        Spatial distribution of crime, justice efficiency, and risk typologies across Indian states
+    </p>
+
+    <label><strong>Select Map Category:</strong></label><br><br>
+
+    <select id="mapSelect" onchange="updatePolicyMap()">
+        <option value="ipc_rate">IPC Crime Rate</option>
+        <option value="murder_rate">Murder Rate</option>
+        <option value="chargesheet_efficiency">Chargesheeting Efficiency</option>
+        <option value="conviction_gap">Conviction Gap</option>
+        <option value="urban_rural">Urban–Rural Crime Contrast</option>
+        <option value="crime_clusters">Crime Risk Clusters (ML)</option>
+    </select>
+
+    <h3 id="policyMapTitle" style="margin-top:20px;"></h3>
+
+    <img id="policyMapImage" class="policy-map-image" />
+
+    <div class="policy-insight-box">
+        <p id="policyMapInsight"></p>
+        <ul id="policyImplications"></ul>
+    </div>
+
+    <!-- ================= DIVIDER ================= -->
+    <hr style="margin:50px 0;">
+
+    <!-- ================= CHART SECTION ================= -->
+    <h2>Analytical Crime Charts</h2>
+
+    <!-- ================= CHART SECTION ================= -->
+<div class="charts-section">
+
+    <h2>Analytical Crime Charts</h2>
+
+    <p class="section-subtitle">
+        Indicator-based analysis supporting spatial crime patterns,
+        justice system performance, and policy prioritisation
+    </p>
+
+    <label><strong>Select Analytical Chart:</strong></label><br><br>
+
+    <select id="chartSelect" onchange="updatePolicyChart()">
+        <!-- CORE CRIME DISTRIBUTION -->
+        <option value="top_ipc_states">Top 10 States by IPC Crimes</option>
+        <option value="ipc_trends">IPC Crime Trends (2020–2022)</option>
+        <option value="crime_share">Share of IPC Crimes (Top States vs Others)</option>
+
+        <!-- JUSTICE SYSTEM PERFORMANCE -->
+
+        <option value="charge_vs_ipc">Chargesheeting vs IPC Crime Rate</option>
+
+        <!-- SOCIO-DEMOGRAPHIC CONTEXT -->
+        <option value="urban_vs_ipc">Urbanization vs IPC Crime Rate</option>
+        <option value="ipc_urban_dist">IPC Crime Distribution by Urbanization</option>
+        <option value="ipc_vs_murder">IPC Crime Rate vs Murder Rate</option>
+
+        <!-- STRUCTURAL / ADVANCED ANALYTICS -->
+        <option value="ipc_treemap">IPC Crime Concentration (Treemap)</option>
+        <option value="crime_correlation">Crime & Justice Correlation Matrix</option>
+        <option value="state_radar">State Crime Profile (Radar)</option>
+    </select>
+
+    <!-- ===== CHART TITLE ===== -->
+    <h3 id="policyChartTitle" style="margin-top:25px;"></h3>
+
+    <!-- ===== CHART IMAGE ===== -->
+    <img
+        id="policyChartImage"
+        class="policy-chart-image"
+        alt="Selected analytical crime chart"
+        style="margin-top:15px;"
+    />
+
+    <!-- ===== POLICY INSIGHT ===== -->
+    <div class="policy-insight-box">
+        <p id="policyChartInsight"></p>
+
+        <h4>Policy Implications</h4>
+        <ul id="policyChartImplications"></ul>
+    </div>
+
 </div>
 
 <!-- ================= ML ================= -->
